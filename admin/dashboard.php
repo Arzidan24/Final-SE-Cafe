@@ -113,8 +113,8 @@ if(!isset($admin_id)){
          $numbers_of_admins = $select_admins->rowCount();
       ?>
       <h3><?= $numbers_of_admins; ?></h3>
-      <p>admins</p>
-      <a href="admin_accounts.php" class="btn">see admins</a>
+      <p>staff</p>
+      <a href="admin_accounts.php" class="btn">see staff</a>
    </div>
 
    <div class="box">
