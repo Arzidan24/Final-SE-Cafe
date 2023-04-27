@@ -21,8 +21,8 @@ if(isset($_POST['submit'])){
    $email = filter_var($email, FILTER_SANITIZE_STRING);
    $method = $_POST['method'];
    $method = filter_var($method, FILTER_SANITIZE_STRING);
-   $address = $_POST['address'];
-   $address = filter_var($address, FILTER_SANITIZE_STRING);
+   //$address = $_POST['address'];
+   //$address = filter_var($address, FILTER_SANITIZE_STRING);
    $total_products = $_POST['total_products'];
    $total_price = $_POST['total_price'];
 
@@ -31,18 +31,18 @@ if(isset($_POST['submit'])){
 
    if($check_cart->rowCount() > 0){
 
-      if($address == ''){
-         $message[] = 'please add your address!';
-      }else{
+      // if($address == ''){
+      //    $message[] = 'please add your address!';
+      
          
-         $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price) VALUES(?,?,?,?,?,?,?,?)");
-         $insert_order->execute([$user_id, $name, $number, $email, $method, $address, $total_products, $total_price]);
+         $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, number, email, method, total_products, total_price) VALUES(?,?,?,?,?,?,?)");
+         $insert_order->execute([$user_id, $name, $number, $email, $method, $total_products, $total_price]);
 
          $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
          $delete_cart->execute([$user_id]);
 
          $message[] = 'order placed successfully!';
-      }
+      
       
    }else{
       $message[] = 'your cart is empty';
@@ -113,7 +113,7 @@ if(isset($_POST['submit'])){
    <input type="hidden" name="name" value="<?= $fetch_profile['name'] ?>">
    <input type="hidden" name="number" value="<?= $fetch_profile['number'] ?>">
    <input type="hidden" name="email" value="<?= $fetch_profile['email'] ?>">
-   <input type="hidden" name="address" value="<?= $fetch_profile['address'] ?>">
+   <!-- <input type="hidden" name="address" value="<?//= $fetch_profile['address'] ?>"> -->
 
    <div class="user-info">
       <h3>your info</h3>
@@ -121,9 +121,9 @@ if(isset($_POST['submit'])){
       <p><i class="fas fa-phone"></i><span><?= $fetch_profile['number'] ?></span></p>
       <p><i class="fas fa-envelope"></i><span><?= $fetch_profile['email'] ?></span></p>
       <a href="update_profile.php" class="btn">update info</a>
-      <h3>delivery address</h3>
-      <p><i class="fas fa-map-marker-alt"></i><span><?php if($fetch_profile['address'] == ''){echo 'please enter your address';}else{echo $fetch_profile['address'];} ?></span></p>
-      <a href="update_address.php" class="btn">update address</a>
+      <!-- <h3>delivery address</h3>
+      <p><i class="fas fa-map-marker-alt"></i><span><?php //if($fetch_profile['address'] == ''){echo 'please enter your address';}else{echo $fetch_profile['address'];} ?></span></p>
+      <a href="update_address.php" class="btn">update address</a> -->
       <select name="method" class="box" required>
          <option value="" disabled selected>select payment method --</option>
          <option value="cash on delivery">cash on delivery</option>
@@ -131,7 +131,7 @@ if(isset($_POST['submit'])){
          <option value="paytm">paytm</option>
          <option value="paypal">paypal</option>
       </select>
-      <input type="submit" value="place order" class="btn <?php if($fetch_profile['address'] == ''){echo 'disabled';} ?>" style="width:100%; background:var(--red); color:var(--white);" name="submit">
+      <input type="submit" value="place order" class="btn <?php // if($fetch_profile['address'] == ''){echo 'disabled';} ?>" style="width:100%; background:var(--red); color:var(--white);" name="submit">
    </div>
 
 </form>

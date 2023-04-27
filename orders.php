@@ -59,7 +59,7 @@ if(isset($_SESSION['user_id'])){
       <p>name : <span><?= $fetch_orders['name']; ?></span></p>
       <p>email : <span><?= $fetch_orders['email']; ?></span></p>
       <p>number : <span><?= $fetch_orders['number']; ?></span></p>
-      <p>address : <span><?= $fetch_orders['address']; ?></span></p>
+      <!-- <p>address : <span><?//= $fetch_orders['address']; ?></span></p> -->
       <p>payment method : <span><?= $fetch_orders['method']; ?></span></p>
       <p>your orders : <span><?= $fetch_orders['total_products']; ?></span></p>
       <p>total price : <span>$<?= $fetch_orders['total_price']; ?>/-</span></p>
